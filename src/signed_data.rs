@@ -219,6 +219,13 @@ pub static RSA_PKCS1_2048_8192_SHA256: SignatureAlgorithm = SignatureAlgorithm {
     verification_alg: &signature::RSA_PKCS1_2048_8192_SHA256,
 };
 
+/// RSA PKCS#1 1.5 signatures using SHA-256 for keys of 2048-8192 bits.
+pub static RSA_PKCS1_2048_8192_SHA256_NONULL: SignatureAlgorithm = SignatureAlgorithm {
+    public_key_alg_id: RSA_ENCRYPTION,
+    signature_alg_id: RSA_PKCS1_SHA256_NONULL,
+    verification_alg: &signature::RSA_PKCS1_2048_8192_SHA256,
+};
+
 /// RSA PKCS#1 1.5 signatures using SHA-384 for keys of 2048-8192 bits.
 pub static RSA_PKCS1_2048_8192_SHA384: SignatureAlgorithm = SignatureAlgorithm {
     public_key_alg_id: RSA_ENCRYPTION,
@@ -313,6 +320,10 @@ const RSA_PKCS1_SHA1: AlgorithmIdentifier = AlgorithmIdentifier {
 
 const RSA_PKCS1_SHA256: AlgorithmIdentifier = AlgorithmIdentifier {
     asn1_id_value: include_bytes!("data/alg-rsa-pkcs1-sha256.der"),
+};
+
+const RSA_PKCS1_SHA256_NONULL: AlgorithmIdentifier = AlgorithmIdentifier {
+    asn1_id_value: include_bytes!("data/alg-rsa-pkcs1-sha256-nonull.der"),
 };
 
 const RSA_PKCS1_SHA384: AlgorithmIdentifier = AlgorithmIdentifier {
@@ -638,6 +649,7 @@ mod tests {
             &'static [&'static signed_data::SignatureAlgorithm] = &[
         // Reasonable algorithms.
         &signed_data::RSA_PKCS1_2048_8192_SHA256,
+        &signed_data::RSA_PKCS1_2048_8192_SHA256_NONULL,
         &signed_data::ECDSA_P256_SHA256,
         &signed_data::ECDSA_P384_SHA384,
         &signed_data::RSA_PKCS1_2048_8192_SHA384,
